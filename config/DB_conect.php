@@ -9,7 +9,7 @@
 
         public function __construct($data = []){
             if (!empty($data)) {
-                hidrate($data);
+                $this->hidrate($data);
                 $db_conect = new PDO(self::SGBD.':host='.self::HOST.';dbname='.self::DBNAME,$this->getDbUser(),$this->getDbPassword());
                 $db_conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $db_conect;
@@ -18,7 +18,7 @@
 
         private function hidrate($data){
             foreach($data as $attribute => $value){
-                $etterMethods = 'set'.ucfirst($attribute);
+                $setterMethods = 'set'.ucfirst($attribute);
                 $this->$setterMethods($value);
             }
         }
@@ -36,7 +36,7 @@
         public function getDbUser(){
             return $this->dbUser;
         }
-        public function geDbPassword(){
+        public function getDbPassword(){
             return $this->dbPassword;
         }
 
@@ -44,7 +44,7 @@
         public function setDbUser($dbUser){
             $this->dbUser = $dbUser;
         }
-        public function setDbPassword(){
+        public function setDbPassword($dbPassword){
             $this->dbPassword = $dbPassword;
         }
     }
